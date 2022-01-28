@@ -1,17 +1,36 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import Auth from "./pages/account_auth/auth";
+import Projects from "./pages/projects/projects";
+import Login from "./pages/account_auth/login";
+import Signup from "./pages/account_auth/signup";
+
+
+import {Route,BrowserRouter,Routes} from 'react-router-dom';
+import {CookiesProvider} from 'react-cookie';
 import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+function Router(){
+
+  return (
+  <React.StrictMode>
+      <CookiesProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route exact path='/' element={<App/>}/>
+            <Route exact path='/auth' element={<Auth/>}/>
+            <Route exact path='/login' element={<Login/>}/>
+            <Route exact path='/signup' element={<Signup/>}/>
+
+            <Route exact path='/projects' element={<Projects/>}/>
+          </Routes>
+        </BrowserRouter>
+      </CookiesProvider>
+  </React.StrictMode>
+  )
+}
+
+ReactDOM.render(<Router/>,document.getElementById('root'));
 reportWebVitals();
