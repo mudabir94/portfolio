@@ -20,9 +20,7 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - defaults:
-        run:
-            working-directory: nodeapi # The working directory path
+           
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
@@ -30,5 +28,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
+        working-directory: nodeapi # The working directory path
     - run: npm run build --if-present
+        working-directory: nodeapi # The working directory path
     - run: npm test
+        working-directory: nodeapi # The working directory path
