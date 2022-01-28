@@ -9,15 +9,17 @@ on:
   pull_request:
     branches: [ main ]
 
+defaults:
+  run:
+    working-directory: nodeapi
+
 
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: nodeapi
+    
 
     strategy:
       matrix:
