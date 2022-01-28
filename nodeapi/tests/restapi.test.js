@@ -4,7 +4,7 @@ const jwt= require("jsonwebtoken")
 const User = require("../models/user")
 const mongoose = require("mongoose")
 const bcrypt = require('bcryptjs')
-const { response } = require('../app')
+const { response, use } = require('../app')
 
 const userOneId = new mongoose.Types.ObjectId()
 
@@ -42,7 +42,7 @@ test("Should signup new user",async () =>{
         expect(response.body.user.name).toBe('Mudabir')
 })
 
-test("Should login exsisting user",async () =>{
+test("Should login  user",async () =>{
     
     
     const response= await request(app).post("/users/login").send({
@@ -50,6 +50,7 @@ test("Should login exsisting user",async () =>{
         password:userOne.password
         }).expect(200)
         const user = await User.findById(userOneId)
+        console.log("user tokens login",user.tokens)
         expect(response.body.token).toBe(user.tokens[1].token)
 })
 
@@ -61,6 +62,23 @@ test("Should  not login nonexsistant user",async () =>{
             password: "MyPass777!"
         }).expect(400)
 })
+
+test("Should  logout exsisting user",async () =>{
+    const user = await User.findById(userOneId)
+    user.tokens = user.tokens.filter((token)=>{
+        console.log("token",token)
+        console.log("user token",user.tokens)
+
+        return token.token !== user.tokens[0].token
+    });
+    
+    const response = await request(app)
+    .post("/users/logout")
+    .set('Autherization',`Auth ${userOne.tokens[0].token}`)
+    .send().expect(200)
+
+})
+
  
 test("Should  get profile for user",async () =>{
     await request(app)
@@ -95,13 +113,3 @@ test("Should not delete account for unauthenticated user",async () =>{
     .expect(401)
 })
 
-
-// test("Should update user fields",async () =>{
-//     await request(app)
-//     .patch("/users/me")
-//     .set('Autherization',`Auth ${userOne.tokens[0].token}`)
-//     .send({
-//         name:'Jess'
-//     })
-//     .expect(200)
-// })
