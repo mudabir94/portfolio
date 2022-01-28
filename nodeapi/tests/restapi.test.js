@@ -19,8 +19,7 @@ const userOne= {
 }
 
 beforeEach(async ()=>{
-    jest.useRealTimers();
-
+    jest.setTimeout(200000)
     await User.deleteMany()
     await new User(userOne).save()
 })
