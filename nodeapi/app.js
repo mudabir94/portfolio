@@ -1,9 +1,12 @@
 const express = require('express')
 require('./db/mongoose')
 const userRouter=require("./routers/user")
+var cors = require('cors')
+
 // const Emp = require('../models/dummyuser') // Link to your user model 
 
 const app = express()
+app.use(cors())
 
 
 app.use(express.json())
