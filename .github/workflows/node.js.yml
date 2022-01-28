@@ -13,9 +13,11 @@ on:
 
 jobs:
   build:
-    working_directory: nodeapi
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./nodeapi
 
     strategy:
       matrix:
