@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "env-cmd -f ./config/test.env jest --runInBand ./tests",
+    "test": "jest --runInBand ./tests",
     "dev": "nodemon index.js"
 
   },
