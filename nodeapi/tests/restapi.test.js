@@ -18,11 +18,12 @@ const userOne= {
     }]
 }
 
+
 beforeEach(async ()=>{
-    jest.setTimeout(200000)
+
     await User.deleteMany()
     await new User(userOne).save()
-})
+},100000)
 
 test("Should signup new user",async () =>{
     const response=await request(app).post("/users").send(
