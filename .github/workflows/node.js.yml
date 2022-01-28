@@ -9,12 +9,11 @@ on:
   pull_request:
     branches: [ main ]
 
-defaults:
-  run:
-    working-directory: nodeapi
+
 
 jobs:
   build:
+    working_directory: ~/nodeapi
 
     runs-on: ubuntu-latest
 
