@@ -9,9 +9,7 @@ on:
   pull_request:
     branches: [ main ]
 
-defaults:
-  run:
-    working-directory: nodeapi/
+
 
 
 
@@ -19,6 +17,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+
+      # Mobile folder working directory.
+      working-directory: nodeapi
     
 
     strategy:
