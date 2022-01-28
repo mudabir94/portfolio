@@ -32,8 +32,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-        working-directory: nodeapi # The working directory path
     - run: npm run build --if-present
-        working-directory: nodeapi # The working directory path
     - run: npm test
-        working-directory: nodeapi # The working directory path
